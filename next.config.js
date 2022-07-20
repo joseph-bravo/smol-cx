@@ -7,13 +7,14 @@ const nextConfig = {
 module.exports = nextConfig;
 
 module.exports = {
-  async redirects() {
-    return [
-      {
-        source: '/:uid',
-        destination: '/api/:uid', // Matched parameters can be used in the destination
-        permanent: true
-      }
-    ];
+  async rewrites() {
+    return {
+      afterFiles: [
+        {
+          source: '/:uid',
+          destination: '/api/:uid'
+        }
+      ]
+    };
   }
 };
