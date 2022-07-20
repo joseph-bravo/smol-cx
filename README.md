@@ -1,1 +1,1 @@
-# app
+Repo for `smol.cx` application.
