@@ -1,9 +1,14 @@
-const yup = require('yup');
-const ShortUniqueId = require('short-unique-id');
-const uid = new ShortUniqueId({ length: 6 });
-const db = require('../../lib/db');
+import { NextApiRequest, NextApiResponse } from 'next';
+import db from '$lib/db';
+import yup from 'yup';
+import ShortUniqueId from 'short-unique-id';
 
-export default async function handler(req, res) {
+const uid = new ShortUniqueId({ length: 6 });
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const bodySchema = yup.object({
     url: yup.string().url().required()
   });
