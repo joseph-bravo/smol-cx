@@ -5,16 +5,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-module.exports = {
-  async rewrites() {
-    return {
-      afterFiles: [
-        {
-          source: '/:uid',
-          destination: '/api/:uid'
-        }
-      ]
-    };
-  }
-};
