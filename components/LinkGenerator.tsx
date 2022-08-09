@@ -2,6 +2,7 @@ import { Stack, Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { object, string } from 'yup';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const formSchema = object({
   destinationUrl: string().url().required()
@@ -16,17 +17,24 @@ const LinkGenerator = () => {
           validationSchema={formSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setSubmitting(true);
-            axios
-              .post('/api/link', { destination_url: values.destinationUrl })
-              .then(res => {
-                console.log(res.data[0]);
-                resetForm();
-                setSubmitting(false);
-              })
-              .catch(err => {
-                console.error(err);
-                setSubmitting(false);
-              });
+            toast.promise(
+              axios
+                .post('/api/link', { destination_url: values.destinationUrl })
+                .then(res => {
+                  console.log(res.data[0]);
+                  resetForm();
+                  setSubmitting(false);
+                })
+                .catch(err => {
+                  console.error(err);
+                  setSubmitting(false);
+                }),
+              {
+                pending: 'Generating short-link...',
+                error: 'Something went wrong...',
+                success: 'Short-link has been generated!'
+              }
+            );
           }}
           validateOnChange={true}
           validateOnMount={true}
