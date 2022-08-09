@@ -14,9 +14,8 @@ export default async function handler(
       POST: async () => {
         const body = linksRowSchema.validateSync(req.body);
         const { destination_url } = body;
-        if (req.method === 'POST') {
-          const sqlRes = await db.query(
-            `/* SQL */
+        const sqlRes = await db.query(
+          `/* SQL */
               insert into links
                 ("uid", "destination_url")
               values
@@ -24,10 +23,18 @@ export default async function handler(
               returning
                 *
             `,
-            [uid(), destination_url]
-          );
-          res.status(201).json(sqlRes.rows);
-        }
+          [uid(), destination_url]
+        );
+        res.status(201).json(sqlRes.rows);
+      },
+      GET: async () => {
+        const sqlRes = await db.query(
+          `/* SQL */
+            select *
+            from links
+          `
+        );
+        res.status(200).json(sqlRes.rows);
       }
     };
 

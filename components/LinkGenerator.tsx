@@ -1,6 +1,7 @@
 import { Stack, Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { object, string } from 'yup';
+import axios from 'axios';
 
 const formSchema = object({
   destinationUrl: string().url().required()
@@ -13,8 +14,19 @@ const LinkGenerator = () => {
         <Formik
           initialValues={{ destinationUrl: '' }}
           validationSchema={formSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            axios
+              .post('/api/link', { destination_url: values.destinationUrl })
+              .then(res => {
+                console.log(res.data[0]);
+                resetForm();
+                setSubmitting(false);
+              })
+              .catch(err => {
+                console.error(err);
+                setSubmitting(false);
+              });
           }}
           validateOnChange={true}
           validateOnMount={true}
