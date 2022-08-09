@@ -10,6 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    await db.connect();
     const handlers = {
       POST: async () => {
         const body = linksRowSchema.validateSync(req.body);
@@ -50,5 +51,7 @@ export default async function handler(
     } else {
       res.status(500).end();
     }
+  } finally {
+    db.end();
   }
 }

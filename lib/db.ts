@@ -1,6 +1,6 @@
-import { Pool } from 'pg';
+import { Client } from 'pg';
 
-const db = new Pool({
+const db = new Client({
   connectionString: process.env.DB_URL
 });
 
