@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 const LinkList = (props: { links: ShortenedLink[] }) => {
   const links = props.links ? props.links : [];
   return (
-    <Table>
+    <Table striped hover responsive bordered>
       <thead>
         <tr>
           <th>Alias</th>

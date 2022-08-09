@@ -17,7 +17,7 @@ export default async function handler(
         const sqlRes = await db.query(
           `/* SQL */
               insert into links
-                ("uid", "destination_url")
+                ("alias", "destination_url")
               values
                 ($1, $2)
               returning

@@ -1,8 +1,13 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import LinkGenerator from 'components/LinkGenerator';
 import LinkList from 'components/LinkList';
+import useSWR from 'swr';
+import axios from 'axios';
 
 const Home = () => {
+  const { data, error } = useSWR('/api/link', url =>
+    axios(url).then(res => res.data)
+  );
   return (
     <Container>
       <Row>
@@ -13,7 +18,7 @@ const Home = () => {
       </Row>
       <Row>
         <Col>
-          <LinkList links={[]} />
+          <LinkList links={data} />
         </Col>
       </Row>
     </Container>
