@@ -3,12 +3,15 @@ import { Formik } from 'formik';
 import { object, string } from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useSWRConfig } from 'swr';
 
 const formSchema = object({
   destinationUrl: string().url().required()
 });
 
 const LinkGenerator = () => {
+  const { mutate } = useSWRConfig();
+
   return (
     <>
       <Stack>
@@ -19,9 +22,10 @@ const LinkGenerator = () => {
             setSubmitting(true);
             toast.promise(
               axios
-                .post('/api/link', { destination_url: values.destinationUrl })
+                .post('/api/links', { destination_url: values.destinationUrl })
                 .then(res => {
                   console.log(res.data[0]);
+                  mutate('/api/links');
                   resetForm();
                   setSubmitting(false);
                 })
@@ -74,7 +78,7 @@ const LinkGenerator = () => {
                       )
                     : null}
                 </Form.Control.Feedback>
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>URL is valid!</Form.Control.Feedback>
               </Form.Group>
               <Button
                 className="mt-2"

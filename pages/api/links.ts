@@ -32,6 +32,7 @@ export default async function handler(
           `/* SQL */
             select *
             from links
+            order by created_at desc
           `
         );
         res.status(200).json(sqlRes.rows);

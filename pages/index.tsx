@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 
 const Home = () => {
-  const { data, error } = useSWR('/api/link', url =>
+  const { data, error } = useSWR('/api/links', url =>
     axios(url).then(res => res.data)
   );
   return (

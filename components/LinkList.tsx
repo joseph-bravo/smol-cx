@@ -1,10 +1,9 @@
 import { ShortenedLink } from 'interfaces';
-import { Table } from 'react-bootstrap';
 
 const LinkList = (props: { links: ShortenedLink[] }) => {
-  const links = props.links ? props.links : [];
+  const links: ShortenedLink[] = props.links ? props.links : [];
   return (
-    <Table striped hover responsive bordered>
+    <table className="table table-striped table-hover table-bordered">
       <thead>
         <tr>
           <th>Alias</th>
@@ -14,12 +13,12 @@ const LinkList = (props: { links: ShortenedLink[] }) => {
       <tbody>
         {links.map(link => (
           <tr key={link.alias}>
-            <td>{link.alias}</td>
-            <td>{link.destination_url}</td>
+            <td className="col-2">{link.alias}</td>
+            <td className="col-10 text-break">{link.destination_url}</td>
           </tr>
         ))}
       </tbody>
-    </Table>
+    </table>
   );
 };
 export default LinkList;
