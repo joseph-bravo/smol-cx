@@ -1,4 +1,4 @@
-import { Stack, Form, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { object, string } from 'yup';
 import axios from 'axios';
@@ -13,8 +13,11 @@ const LinkGenerator = () => {
   const { mutate } = useSWRConfig();
 
   return (
-    <>
-      <Stack>
+    <Card>
+      <Card.Body>
+        <Card.Title>
+          <i>smol</i> Link Generator
+        </Card.Title>
         <Formik
           initialValues={{ destinationUrl: '' }}
           validationSchema={formSchema}
@@ -54,7 +57,11 @@ const LinkGenerator = () => {
             errors
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
-              <Form.Group controlId="destination_url">
+              <Form.Group className="mb-3" controlId="destination_url">
+                <Form.Label>
+                  Destination URL (including <code>https://</code> or{' '}
+                  <code>http://</code>)
+                </Form.Label>
                 <Form.Control
                   required
                   onChange={handleChange}
@@ -62,13 +69,15 @@ const LinkGenerator = () => {
                   value={values.destinationUrl}
                   type="text"
                   isInvalid={
-                    touched.destinationUrl && errors.destinationUrl
+                    values.destinationUrl.length > 0 &&
+                    touched.destinationUrl &&
+                    errors.destinationUrl
                       ? true
                       : false
                   }
                   onFocus={() => setFieldTouched('destinationUrl', true)}
                   isValid={touched.destinationUrl && !errors.destinationUrl}
-                  placeholder="Enter destination URL"
+                  placeholder="Enter URL"
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.destinationUrl
@@ -80,18 +89,14 @@ const LinkGenerator = () => {
                 </Form.Control.Feedback>
                 <Form.Control.Feedback>URL is valid!</Form.Control.Feedback>
               </Form.Group>
-              <Button
-                className="mt-2"
-                type="submit"
-                disabled={!isValid || isSubmitting}
-              >
+              <Button type="submit" disabled={!isValid || isSubmitting}>
                 Create Link
               </Button>
             </Form>
           )}
         </Formik>
-      </Stack>
-    </>
+      </Card.Body>
+    </Card>
   );
 };
 

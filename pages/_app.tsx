@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <ToastContainer
@@ -18,6 +18,6 @@ function App({ Component, pageProps }) {
       <Component {...pageProps} />
     </>
   );
-}
+};
 
 export default App;
