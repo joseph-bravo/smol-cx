@@ -6,7 +6,9 @@
 
 - TypeScript
 - React (with Hooks)
-- Bootstrap
+- SCSS / Bootstrap 5
+- Next.js
+- Vercel
 - Supabase (PostgreSQL)
 
 ## Development Guide
