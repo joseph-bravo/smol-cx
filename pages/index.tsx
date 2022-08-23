@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Stack } from 'react-bootstrap';
 import LinkGenerator from 'components/LinkGenerator';
 import LinkList from 'components/LinkList';
 import useSWR from 'swr';
@@ -14,21 +14,18 @@ const Home = () => {
       <Head>
         <title>smol.cx | Link Shortener</title>
       </Head>
-      <Container className="pb-5">
-        <Row>
-          <Col className="py-5">
-            <h1 className="display-1 text-center mb-5">
+      <Container>
+        <Stack className="pb-5" gap={4}>
+          <div>
+            <h1 className="display-1 text-center mt-3 mb-5">
               <i>smol</i>.cx
             </h1>
             <i className="bi bi-clipboard"></i>
             <LinkGenerator />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <LinkList links={data} />
-          </Col>
-        </Row>
+          </div>
+          <hr />
+          <LinkList links={data} />
+        </Stack>
       </Container>
     </>
   );
