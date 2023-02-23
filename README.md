@@ -1,3 +1,5 @@
+> # This project does not have a live deployment.
+
 # app.smol.cx
 
 ### A Web App to manage shortlinks created on `smol.cx`.
