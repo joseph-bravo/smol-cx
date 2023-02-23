@@ -1,3 +1,5 @@
+> # This project does not have a live deployment.
+
 # rerouter
 
 ### Vercel application to handle rerouting off of `smol.cx/:alias`
